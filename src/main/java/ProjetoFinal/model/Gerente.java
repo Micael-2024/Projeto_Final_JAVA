@@ -7,6 +7,6 @@ public class Gerente extends Funcionario {
 
     @Override
     public void realizarTarefa() {
-        System.out.println(getNome() + " está gerenciando o estoque.");
+        System.out.println(getNome() + " está gerenciando a loja.");
     }
 }
