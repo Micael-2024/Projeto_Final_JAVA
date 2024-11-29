@@ -11,7 +11,19 @@ public class Funcionario {
         this.id = id;
     }
 
-    public String getDetalhes() {
-        return "Funcionário: " + nome + ", Cargo: " + cargo + ", ID: " + id;
+    public String getNome() {
+        return nome;
+    }
+
+    public String getCargo() {
+        return cargo;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void realizarTarefa() {
+        System.out.println(nome + " está realizando uma tarefa genérica.");
     }
 }
