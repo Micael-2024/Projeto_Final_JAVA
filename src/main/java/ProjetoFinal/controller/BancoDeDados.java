@@ -1,82 +1,39 @@
+package IdeiaProjetoFinal.controller;
+
+import IdeiaProjetoFinal.model.*;
 import java.io.*;
 import java.util.ArrayList;
+
 
 public class BancoDeDados {
     private ArrayList<String> linhas;
     private ArrayList<Item> itens;
+    private ArrayList<Funcionario> funcionarios; // Lista de funcionários
+    private ArrayList<Estoque> estoques; // Lista de estoques
 
-    public BancoDeDados(){
+
+    public BancoDeDados() {
         linhas = new ArrayList<>();
         ler();
         itens = new ArrayList<>();
+        funcionarios = new ArrayList<>();
         transformarLinhasEmObjetos(linhas);
-
-    }
-    public void cadastrar(Item item) {
-        String linha = "";
-        try {
-            OutputStream os = new FileOutputStream( "fardamento.txt", true); //false para apagar itens da lista
-            OutputStreamWriter osw = new OutputStreamWriter(os);
-            BufferedWriter br = new BufferedWriter(osw);
-
-            linha = item.getNome()+","+item.getCodigo();
-            br.write(linha);
-            br.newLine();
-
-            br.close();
-            osw.close();
-            os.close();
-            System.out.println(linha+" foi cadastrado com sucesso !");
-            System.out.println("O arquivo cadastro foi fechado !");
-            atualizar();
-        } catch (Exception e) {
-            System.out.println("Não foi possivel escrever a informação no arquivo de texto !!");
-            System.out.println(e);
-        }
-    }
-
-    public void cadastrar(Item item) {
-        String linha = "";
-        try {
-            OutputStream os = new FileOutputStream( "fardamento.txt", true); //false para apagar itens da lista
-            OutputStreamWriter osw = new OutputStreamWriter(os);
-            BufferedWriter br = new BufferedWriter(osw);
-
-            linha = item.getNome()+","+item.getCodigo();
-            br.write(linha);
-            br.newLine();
-
-            br.close();
-            osw.close();
-            os.close();
-            System.out.println(linha+" foi cadastrado com sucesso !");
-            System.out.println("O arquivo cadastro foi fechado !");
-            atualizar();
-        } catch (Exception e) {
-            System.out.println("Não foi possivel escrever a informação no arquivo de texto !!");
-            System.out.println(e);
-        }
     }
 
     public void ler() {
         String linha = "";
         try {
-            InputStream is = new FileInputStream("fardamento.txt");
+            InputStream is = new FileInputStream("Infos.txt");
             InputStreamReader isr = new InputStreamReader(is);
             BufferedReader br = new BufferedReader(isr);
 
             linha = br.readLine();
 
-            while(linha != null) {
+            while (linha != null) {
                 System.out.println(linha);
                 linhas.add(linha);
                 linha = br.readLine();
             }
-
-            br.close();
-            isr.close();
-            is.close();
-            System.out.println("O arquivo texto foi lido com sucesso !");
 
         } catch (Exception e) {
             System.out.println("Não foi possivel ler o arquivo de texto !!");
@@ -85,16 +42,23 @@ public class BancoDeDados {
     }
 
     public void transformarLinhasEmObjetos(ArrayList<String> linhas) {
-        String[] aux = new String[2];
-        Item item;
+        itens.clear(); // Limpa os itens existentes para evitar duplicação
+        for (String linha : linhas) {
+            try {
+                String[] partes = linha.split(",");
+                String nome = partes[0];
+                int codigo = Integer.parseInt(partes[1]);
+                String descricaoCategoria = partes[2];
+                int codigoCategoria = Integer.parseInt(partes[3]);
 
-        for (int i = 0; i < linhas.size(); i++) {
-            aux = linhas.get(i).split(","); // calça, 1201
-            item = new Item(aux[0], Integer.parseInt(aux[1]));
-            itens.add(item);
+                Categoria categoria = new Categoria(descricaoCategoria, codigoCategoria);
+                Item item = new Item(nome, codigo, categoria);
+                itens.add(item);
+            } catch (Exception e) {
+                System.out.println("Erro ao transformar linha em objeto: " + linha);
+                System.out.println("Detalhes do erro: " + e.getMessage());
+            }
         }
-
-        System.out.println("Os dados do Arquivo ja são objetos Java !");
     }
 
     public ArrayList<Item> getItens() {
@@ -106,5 +70,25 @@ public class BancoDeDados {
         transformarLinhasEmObjetos(linhas);
 
         System.out.println("Os dados dos itens foram atualizados com as novas informações cadastradas !!");
+    }
+
+    public void cadastrarFuncionario(Funcionario funcionario) {
+        funcionarios.add(funcionario);
+        System.out.println("Funcionário " + funcionario.getNome() + " cadastrado com sucesso!");
+    }
+
+    public ArrayList<Funcionario> getFuncionarios() {
+        return funcionarios; // Retorne a lista corretamente inicializada
+    }
+
+    public void adicionarAoEstoque(Item item1, int i) {
+    }
+
+    public Iterable<? extends Estoque> getEstoques() {
+        return estoques;
+    }
+
+    public void atualizarPedido(int i, String concluído) {
+
     }
 }
