@@ -1,3 +1,5 @@
+package ProjetoFinal.model;
+
 public class Relatorio {
 
     public void gerarRelatorioEstoque(ArrayList<Estoque> estoques) {

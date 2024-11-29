@@ -1,3 +1,5 @@
+package ProjetoFinal.model;
+
 public class Categoria {
     private String nome;
     private int id;

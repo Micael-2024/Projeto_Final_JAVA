@@ -1,3 +1,5 @@
+package ProjetoFinal.model;
+
 public class Item {
     private String nome;
     private int codigo;

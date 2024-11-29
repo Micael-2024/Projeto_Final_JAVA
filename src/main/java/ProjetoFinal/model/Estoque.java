@@ -1,3 +1,5 @@
+package ProjetoFinal.model;
+
 public class Estoque {
     private Item item;
     private int quantidade;

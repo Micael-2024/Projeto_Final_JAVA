@@ -1,3 +1,5 @@
+package ProjetoFinal.model;
+
 public class Funcionario {
     private String nome;
     private String cargo;
