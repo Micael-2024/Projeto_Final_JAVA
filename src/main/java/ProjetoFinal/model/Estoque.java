@@ -1,6 +1,8 @@
-package ProjetoFinal.model;
+package IdeiaProjetoFinal.model;
 
-public class Estoque {
+import Interfaces.IRelatorio;
+
+public class Estoque implements IRelatorio {
     private Item item;
     private int quantidade;
 
@@ -9,11 +11,16 @@ public class Estoque {
         this.quantidade = quantidade;
     }
 
-    public void atualizarQuantidade(int novaQuantidade) {
-        this.quantidade = novaQuantidade;
+
+    @Override
+    public void gerarRelatorio() {
+        System.out.println("Relatório de Estoque: Item: " + item.getNome() + ", Quantidade: " + quantidade);
     }
 
-    public String getStatus() {
-        return "Item: " + item.getNome() + ", Quantidade: " + quantidade;
+    public boolean getStatus() {
+        return false;
+    }
+
+    public void adicionarItem(int geral) {
     }
 }
