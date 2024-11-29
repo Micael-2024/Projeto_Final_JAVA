@@ -1,7 +1,6 @@
 package IdeiaProjetoFinal.controller;
 
 import IdeiaProjetoFinal.model.*;
-import java.io.*;
 import java.util.ArrayList;
 
 
@@ -14,31 +13,9 @@ public class BancoDeDados {
 
     public BancoDeDados() {
         linhas = new ArrayList<>();
-        ler();
         itens = new ArrayList<>();
         funcionarios = new ArrayList<>();
         transformarLinhasEmObjetos(linhas);
-    }
-
-    public void ler() {
-        String linha = "";
-        try {
-            InputStream is = new FileInputStream("Infos.txt");
-            InputStreamReader isr = new InputStreamReader(is);
-            BufferedReader br = new BufferedReader(isr);
-
-            linha = br.readLine();
-
-            while (linha != null) {
-                System.out.println(linha);
-                linhas.add(linha);
-                linha = br.readLine();
-            }
-
-        } catch (Exception e) {
-            System.out.println("Não foi possivel ler o arquivo de texto !!");
-            System.out.println(e);
-        }
     }
 
     public void transformarLinhasEmObjetos(ArrayList<String> linhas) {
@@ -63,13 +40,6 @@ public class BancoDeDados {
 
     public ArrayList<Item> getItens() {
         return itens;
-    }
-
-    public void atualizar() {
-        ler();
-        transformarLinhasEmObjetos(linhas);
-
-        System.out.println("Os dados dos itens foram atualizados com as novas informações cadastradas !!");
     }
 
     public void cadastrarFuncionario(Funcionario funcionario) {
