@@ -1,4 +1,4 @@
-package ProjetoFinal.model;
+package IdeiaProjetoFinal.model;
 
 public class Categoria {
     private String nome;
@@ -7,6 +7,14 @@ public class Categoria {
     public Categoria(String nome, int id) {
         this.nome = nome;
         this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getDescricao() {
